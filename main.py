@@ -16,18 +16,19 @@ food = Food()
 scoreboard = Score()
 
 screen.listen()
-screen.onkey(key='Up', fun=snape.up, )
-screen.onkey(key='Down', fun=snape.down, )
-screen.onkey(key='Left', fun=snape.left, )
-screen.onkey(key='Right', fun=snape.right, )
+screen.onkey(key='Up', fun=snape.up)
+screen.onkey(key='Down', fun=snape.down)
+screen.onkey(key='Left', fun=snape.left)
+screen.onkey(key='Right', fun=snape.right)
+screen.onkey(key='q', fun=snape.end_game)
 
 
 screen.update()
-game_on = True
 
-while game_on:
+
+while snape.game_on:
     screen.update()
-    sleep(0.05)
+    sleep(0.03)
     snape.move()
     if snape.head.distance(food) < 15:
         food.refresh()
@@ -35,12 +36,14 @@ while game_on:
         scoreboard.increase_score()
 
     if snape.head.xcor() < -290 or snape.head.xcor() > 290 or snape.head.ycor() < -290 or snape.head.ycor() > 290:
-        game_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snape.reset()
+        sleep(3)
 
     for segment in snape.segments[1:]:
         if snape.head.distance(segment) < 5:
-            game_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snape.reset()
+            sleep(3)
 
 screen.exitonclick()
