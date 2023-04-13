@@ -13,4 +13,3 @@ rules to the game I've created:
 * 'DOWN' key turns towards SOUTH
 * 'LEFT' key turns towards WEST
 * 'RIGHT' key turns towards EAST
-* 
